@@ -8,25 +8,51 @@ function cdls() {
     ls;
 }
 
-# プロンプト
+############# プロンプト ############################################
+
+# git-prompt
+source ~/.zsh/git-prompt.sh
+
+# git-completion
+fpath=(~/.zsh $fpath)
+zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
+autoload -Uz compinit && compinit
+
+# オプション
+###########################################################################################################################################################################################################################################################################
+# GIT_PS1_SHOWDIRTYSTATE：この変数を非空に設定すると、Gitの状態が表示されます。具体的には、未ステージの変更(*)やステージ済みの変更(+)がブランチ名の隣に表示されます。この設定はリポジトリごとに変更できます。                                                                                          #
+# GIT_PS1_SHOWUNTRACKEDFILES：この変数を非空に設定すると、未追跡のファイルが存在するかどうかが表示されます。具体的には、未追跡のファイルが存在する場合、'%'記号がブランチ名の隣に表示されます。この設定はリポジトリごとに変更できます。                                                                     #
+# GIT_PS1_SHOWSTASHSTATE：この変数を非空に設定すると、現在何かがスタッシュされているかどうかが表示されます。具体的には、何かがスタッシュされている場合、'$'記号がブランチ名の隣に表示されます。                                                                                                       #
+# GIT_PS1_SHOWUPSTREAM：この変数を"auto"に設定すると、HEADとその上流との差分が表示されます。具体的には、'<'はあなたが遅れていることを、'>'は進んでいることを、'<>'は分岐していることを、'='は差分がないことを示します。この変数をスペースで区切られた値のリストに設定することで、表示をさらに制御できます。           #
+# GIT_PS1_STATESEPARATOR：この変数を設定すると、ブランチ名と上記の状態記号との間の区切り文字を変更できます。デフォルトの区切り文字はスペースです。                                                                                                                                             #
+###########################################################################################################################################################################################################################################################################
+
+GIT_PS1_SHOWDIRTYSTATE=true     # 未ステージの変更(*)やステージ済みの変更(+)がブランチ名の隣に表示される
+GIT_PS1_SHOWUNTRACKEDFILES=true # 未追跡のファイルが存在する場合、'%'記号がブランチ名の隣に表示される。
+GIT_PS1_SHOWSTASHSTATE=true     # 何かがスタッシュされている場合、'$'記号がブランチ名の隣に表示されます。
+GIT_PS1_SHOWUPSTREAM=auto       # '<'はあなたが遅れていることを、'>'は進んでいることを、'<>'は分岐していることを、'='は差分がないことを示します。
+GIT_PS1_STATESEPARATOR=":"
+
 setopt PROMPT_SUBST
-function parse_git_branch {
-    git branch --no-color 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/[\1]/"
-}
-PROMPT="
-%F{2}%n%f [%*] %F{7}%15~%f
+# コマンドを打つたびにgit branch情報を更新するように
+autoload -U add-zsh-hook
+function render_prompt {
+    # 左側
+    PROMPT="
+%F{2}%n%f [%*] %F{cyan}%15~%f %F{2}$(__git_ps1 "(%s)")%f
 
 %(?!(๑˃̵ᴗ˂̵)ﻭ <!(;^ω^%) <)  "
-
-# RPROMPT="%F{2}$(parse_git_branch)%f"
-
-autoload -U add-zsh-hook
-function update_current_git_branch {
-    RPROMPT="%F{2}$(parse_git_branch)%f"
+    
+    # 右側
+    # RPROMPT="%F{2}$(__git_ps1 "(%s)")%f"
 }
-add-zsh-hook precmd update_current_git_branch
+add-zsh-hook precmd render_prompt
+render_prompt
 
 
+
+
+############# alias ############################################
 alias ssh_chuo='ssh 17D8101002F@133.91.32.101'
 alias scp_java='scp -r /Users/petite/Documents/java/java.zip 17D8101002F@133.91.32.101:/jugyou/ise/17D8101002F/javawork/from_mac'
 alias cd_atcoder='cd /Users/petite/Documents/programming/kyopro/atcoder'
@@ -53,21 +79,9 @@ alias minecraft_server_up="java -Xmx3G -Xms1G -jar server.jar nogui"
 
 alias sc="screen"
 alias cplex="/Applications/CPLEX_Studio1210/cplex/bin/x86-64_osx/cplex"
-# cd_atcoder
-# PROMPT='
-# %B%F{yellow}%m%f %F{red}%~%f%b
-# %# '
-# %B%(?!%F{cyan}(๑˃̵ᴗ˂̵)ﻭ <%f!%F{blue}(;^ω^%) <%f)  %f%b'
-#%Bと%bで囲むと大文字
 
-#https://qiita.com/mollifier/items/40d57e1da1b325903659
-#%F{red}%fで囲むと赤
 
-#%m 
-#%~ ディレクトリパス
-
-#PROMPT='
-#%F{yellow}%m%f %F{green}%~ $ '
+############# PATH ############################################
 export PATH=/usr/local/bin:$PATH
 export PATH=$PATH:
 export CPATH=/usr/local/bin
@@ -86,13 +100,6 @@ setopt ignore_eof
 # かわいいやつ
 # http://raichel.hatenablog.com/entry/2015/08/16/225536
 
-# PROMPT='%{${fg[yellow]}%}%~%{${reset_color}%}
-# [%n@%md]${vcs_info_msg_0_}
-# %(?.%B%F{green}.%B%F{blue})%(?!(๑˃̵ᴗ˂̵)ﻭ < !(;^ω^%) < )%f%b'
-# RPROMPT=''
-
-#(;^ω^%)   (๑˃̵ᴗ˂̵)ﻭexport PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
-
 # export PATH=$PATH:~/.nodebrew/current/bin/
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
@@ -105,4 +112,6 @@ export JAVA_8_HOME=$(/usr/libexec/java_home -v 1.8)
 alias java17="export JAVA_HOME=$JAVA_17_HOME"
 alias java11="export JAVA_HOME=$JAVA_11_HOME"
 alias java8="export JAVA_HOME=$JAVA_8_HOME"
+
+# fzf (ctrl+rで履歴)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
