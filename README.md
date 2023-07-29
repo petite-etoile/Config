@@ -23,4 +23,4 @@ $ git submodule update
 ## iTerm/
 
 - `iTerm/iTerm2-Color-Schemes/`の [clone 元](https://github.com/mbadolato/iTerm2-Color-Schemes)
-- カラーパレットの見た目は[ここ](iTerm/iTerm2-Color-Schemes/README.md)をみて
+- カラーパレットの見た目は[ここ](https://github.com/mbadolato/iTerm2-Color-Schemes/blob/master/README.md)をみて
