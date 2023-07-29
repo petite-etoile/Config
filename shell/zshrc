@@ -53,32 +53,30 @@ render_prompt
 
 
 ############# alias ############################################
-alias ssh_chuo='ssh 17D8101002F@133.91.32.101'
-alias scp_java='scp -r /Users/petite/Documents/java/java.zip 17D8101002F@133.91.32.101:/jugyou/ise/17D8101002F/javawork/from_mac'
+# change directory
+alias cd_tet4="cd /Users/petite/Documents/programming/web/tet4"
 alias cd_atcoder='cd /Users/petite/Documents/programming/kyopro/atcoder'
-alias cd_Python='cd /Users/petite/Documents/programming/Python'
 alias cd_snippets="cd /Users/petite/Library/Application\ Support/Code/User/snippets/"
-alias cd_B4="cd /Users/petite/Documents/University/class/B4"
-alias cd_lab="cd /Users/petite/Documents/University/lab"
 alias cd_minecraft="cd /Users/petite/Documents/minecraft-server"
+
+# launch app
 alias line="open -a Line.app"
 alias disc="open -a Discord.app"
-alias check="python /Users/petite/Documents/Python/something/check_atcoder.py"
-alias py="check & python"
-alias pythonI="/usr/local/bin/python3.8"
 alias slack="open /Applications/Slack.app"
 alias message="open /Applications/Messages.app/"
-alias p="python3"
 alias memo="open /Applications/Notes.app/"
-alias System="open /Applications/System\ Preferences.app/"
+alias system="open /Applications/System\ Preferences.app/"
+
+# program
+alias p="python3"
+alias pythonI="/usr/local/bin/python3.8"   # インタラクティク用
 alias jup="jupyter-notebook"
 # alias cpp="g++-9 -g -D_GLIBCXX_DEBUG -ftrapv -O2 "
 alias cpp="g++-12 -g -ftrapv -fsanitize=undefined,address  -std=c++17 -I ~/Documents/programming/kyopro/atcoder/ac-library"
 alias cppopt="g++-12 -O2  -std=c++17 -I ~/Documents/programming/kyopro/atcoder/ac-library"
-alias minecraft_server_up="java -Xmx3G -Xms1G -jar server.jar nogui"
-
-alias sc="screen"
 alias cplex="/Applications/CPLEX_Studio1210/cplex/bin/x86-64_osx/cplex"
+alias minecraft_server_up="java -Xmx3G -Xms1G -jar server.jar nogui"
+alias sc="screen"
 
 
 ############# PATH ############################################
