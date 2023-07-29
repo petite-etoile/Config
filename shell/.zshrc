@@ -1,9 +1,31 @@
+alias cd=cdls
+export LSCOLORS=gxfxcxdxbxegedabagacad
+alias ls="ls -GF"
+
 function cdls() {
     # cdがaliasでループするので\をつける
     \cd $1;
     ls;
 }
-alias cd=cdls
+
+# プロンプト
+setopt PROMPT_SUBST
+function parse_git_branch {
+    git branch --no-color 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/[\1]/"
+}
+PROMPT="
+%F{2}%n%f [%*] %F{7}%15~%f
+
+%(?!(๑˃̵ᴗ˂̵)ﻭ <!(;^ω^%) <)  "
+
+# RPROMPT="%F{2}$(parse_git_branch)%f"
+
+autoload -U add-zsh-hook
+function update_current_git_branch {
+    RPROMPT="%F{2}$(parse_git_branch)%f"
+}
+add-zsh-hook precmd update_current_git_branch
+
 
 alias ssh_chuo='ssh 17D8101002F@133.91.32.101'
 alias scp_java='scp -r /Users/petite/Documents/java/java.zip 17D8101002F@133.91.32.101:/jugyou/ise/17D8101002F/javawork/from_mac'
@@ -17,6 +39,7 @@ alias line="open -a Line.app"
 alias disc="open -a Discord.app"
 alias check="python /Users/petite/Documents/Python/something/check_atcoder.py"
 alias py="check & python"
+alias pythonI="/usr/local/bin/python3.8"
 alias slack="open /Applications/Slack.app"
 alias message="open /Applications/Messages.app/"
 alias p="python3"
@@ -24,18 +47,17 @@ alias memo="open /Applications/Notes.app/"
 alias System="open /Applications/System\ Preferences.app/"
 alias jup="jupyter-notebook"
 # alias cpp="g++-9 -g -D_GLIBCXX_DEBUG -ftrapv -O2 "
-alias cpp="g++-9 -g -ftrapv -fsanitize=undefined,address  -std=c++17 -I ~/Documents/programming/kyopro/atcoder/ac-library"
-alias cppopt="g++-9 -O2  -std=c++17 -I ~/Documents/programming/kyopro/atcoder/ac-library"
-alias ls="ls -G"
+alias cpp="g++-12 -g -ftrapv -fsanitize=undefined,address  -std=c++17 -I ~/Documents/programming/kyopro/atcoder/ac-library"
+alias cppopt="g++-12 -O2  -std=c++17 -I ~/Documents/programming/kyopro/atcoder/ac-library"
 alias minecraft_server_up="java -Xmx3G -Xms1G -jar server.jar nogui"
 
 alias sc="screen"
 alias cplex="/Applications/CPLEX_Studio1210/cplex/bin/x86-64_osx/cplex"
 # cd_atcoder
-PROMPT='
-%B%F{yellow}%m%f %F{red}%~%f%b
-
-%B%(?!%F{cyan}(๑˃̵ᴗ˂̵)ﻭ <%f!%F{blue}(;^ω^%) <%f)  %f%b'
+# PROMPT='
+# %B%F{yellow}%m%f %F{red}%~%f%b
+# %# '
+# %B%(?!%F{cyan}(๑˃̵ᴗ˂̵)ﻭ <%f!%F{blue}(;^ω^%) <%f)  %f%b'
 #%Bと%bで囲むと大文字
 
 #https://qiita.com/mollifier/items/40d57e1da1b325903659
@@ -83,3 +105,4 @@ export JAVA_8_HOME=$(/usr/libexec/java_home -v 1.8)
 alias java17="export JAVA_HOME=$JAVA_17_HOME"
 alias java11="export JAVA_HOME=$JAVA_11_HOME"
 alias java8="export JAVA_HOME=$JAVA_8_HOME"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
