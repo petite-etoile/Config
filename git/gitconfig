@@ -1,0 +1,16 @@
+[user]
+	email = tkkydrm3tn@yahoo.co.jp
+[core]
+	quotepath = false
+[init]
+	defaultBranch = main
+[alias]
+	a = add 
+	ap = add -p
+	amend = commit --amend
+	br = branch 
+	co = chechout
+	cm = commit -m
+	l = log --graph --oneline --decorate --all
+	s = status
+	unstage = reset HEAD --
