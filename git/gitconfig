@@ -9,8 +9,14 @@
 	ap = add -p
 	amend = commit --amend
 	br = branch 
-	co = chechout
+	ch = checkout
+	chb = checkout -b
 	cm = commit -m
-	l = log --graph --oneline --decorate --all
+	l = log --graph --oneline --decorate --all -n 5
+	ln = log --graph --oneline --decorate --all -n
+	lf = log --graph --oneline --decorate --all
 	s = status
 	unstage = reset HEAD --
+	pushthis = push origin HEAD
+[pull]
+	rebase = false
