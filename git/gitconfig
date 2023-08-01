@@ -12,9 +12,13 @@
 	ch = checkout
 	chb = checkout -b
 	cm = commit -m
-	l = log --graph --oneline --decorate --all -n 5
-	ln = log --graph --oneline --decorate --all -n
-	lf = log --graph --oneline --decorate --all
+	l = log --graph --oneline --decorate -n 10
+	lo = log --oneline -n 10
+	ln = log --graph --oneline --decorate -n
+	lf = log --graph --oneline --decorate
+	la = log --graph --oneline --decorate --all -n 10
+	lan = log --graph --oneline --decorate --all -n
+	laf = log --graph --oneline --decorate --all
 	s = status
 	unstage = reset HEAD --
 	pushthis = push origin HEAD
